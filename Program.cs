@@ -1,23 +1,42 @@
-﻿
-        public static int Solution(int[] arr)
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AreaLibrary;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var arr = new[] { 1, 5, 2, 1, 4, 2147483647 ,1};
+            Solution(arr);
+        }
+
+        public static int Solution(int[] A)
         {
             int answer = 0;
 
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < A.Length; i++)
             {
-                int[] rangeI = Enumerable.Range(i - arr[i], arr[i]*2+1).ToArray();
-                
-                for (int j = i + 1; j < arr.Length; j++)
-                {
-                    int[] rangeJ = Enumerable.Range(j - arr[j], arr[j]*2+1).ToArray();
 
-                    if (rangeJ.Any(valJ => rangeI.Contains(valJ)))
+                for (int j = i + 1; j < A.Length; j++)
+                {
+
+                    if ((long)(i + A[i]) >= (long)(j - A[j]))
                     {
-                        answer++;
+                        if (answer < 10000000)
+                        {
+                            answer++;
+                        }
+                        else
+                        {
+                            return -1;
+                        }
                     }
                 }
             }
-            Console.WriteLine(answer);
-
             return answer;
         }
+    }
+}
